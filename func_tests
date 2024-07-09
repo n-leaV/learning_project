@@ -10,13 +10,16 @@ class Main(tk.Frame):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.frame = tk. Frame(self.parent)
+        self.bodystate = kwargs['body']
         Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual data'}
-        textbody = Dict[kwargs['body']]
-        self.text = tk.Label(self.frame, textvariable=textbody)
+        self.textbody = Dict[self.bodystate]
+        self.text = tk.Label(self.frame, textvariable=self.textbody)
 
+root = tk.Tk()
 
-body = Main(a, body='State 1')
+body = Main(root, body='State 1')
+
 
 # def testingkwargs(a, **kwargs):
 #     dict = {'one':'yagoo', 'two':2}

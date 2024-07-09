@@ -34,11 +34,11 @@ class Databar(tk.Frame):
         self.s2button.pack(side="left")
 
 class Main(tk.Frame):
-    def __init__(self, parent, state, *args, **kwargs):
-        tk.Frame.__init__(self, parent, state, *args, **kwargs)
+    def __init__(self, parent, *args, **kwargs):
+        tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.frame = tk. Frame(self.parent)
-        self.bodystate = state
+        self.bodystate = args[0]
         Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual data'}
         self.textbody = Dict[self.bodystate]
