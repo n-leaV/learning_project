@@ -35,14 +35,25 @@ class Databar(tk.Frame):
 
 class Main(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
+        tk.Frame.__init__(self, parent)
         self.parent = parent
         self.frame = tk. Frame(self.parent)
         self.bodystate = args[0]
+        #self.bodystate = self.parent.databar.textbody.get()
         Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual data'}
         self.textbody = Dict[self.bodystate]
-        self.text = tk.Label(self.frame, textvariable=self.textbody)
+        self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.pack()
+
+class Label(tk.Frame):
+    def __init__(self, parent, *args, **kwargs):
+        tk.Frame.__init__(self, parent, *args, **kwargs)
+        self.parent = parent
+        self.frame = tk. Frame(self.parent)
+        self.textbody ='Message Bar Text'
+        self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.pack()
 
 class MainApplication(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -50,9 +61,11 @@ class MainApplication(tk.Frame):
         self.parent = parent
         self.databar = Databar(self)
         self.main = Main(self, self.databar.textbody.get())
+        self.label = Label(self)
         self.exit = Exit(self)
 
         self.databar.frame.pack(side='top')
+        self.label.frame.pack(side='top')
         self.main.frame.pack(side='top')
         self.exit.button.pack(side='bottom')
 
