@@ -38,9 +38,6 @@ class Main(tk.Frame):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.frame = tk. Frame(self.parent)
-        #Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
-        #        'State 3': 'The third and final set of textual data'}
-        #self.textbody = Dict['State 1']
         self.textbody = 'initialising'
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
@@ -73,10 +70,12 @@ class MainApplication(tk.Frame):
         self.label = Label(self)
         self.exit = Exit(self)
 
-        Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
+        Dict = {'State 1': 'This is the first section of text', 'State 2': 'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual data'}
+        
+        self.dictval = self.databar.textbody.get()
         self.label.set('Hello World')
-        self.main.set(Dict[self.databar.textbody.get()])
+        self.main.set(Dict[self.dictval])
 
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
