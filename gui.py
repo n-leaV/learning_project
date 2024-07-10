@@ -22,27 +22,31 @@ class Databar(tk.Frame):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.frame = tk.Frame(self.parent)
-        self.ex = 'hi'
-        #self.frame.pack(side='top')
-
         self.textbody= tk.StringVar(value="State 1")
         self.s1button = tk.Radiobutton(self.frame, text="State 1", variable=self.textbody,
             indicatoron=False, value="State 1", width=32)
         self.s2button = tk.Radiobutton(self.frame, text="State 2", variable=self.textbody,
             indicatoron=False, value="State 2", width=32)
+        self.s3button = tk.Radiobutton(self.frame, text="State 3", variable=self.textbody,
+            indicatoron=False, value="State 3", width=32)
         self.s1button.pack(side="left")
         self.s2button.pack(side="left")
+        self.s3button.pack(side='left')
 
 class Main(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.frame = tk. Frame(self.parent)
-        self.bodystate = args[0]
-        #self.bodystate = self.parent.databar.textbody.get()
-        Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
-                'State 3': 'The third and final set of textual data'}
-        self.textbody = Dict[self.bodystate]
+        #Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
+        #        'State 3': 'The third and final set of textual data'}
+        #self.textbody = Dict['State 1']
+        self.textbody = 'initialising'
+        self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.pack()
+    def set(self, body):
+        self.text.destroy()
+        self.textbody = body
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
 
@@ -54,15 +58,25 @@ class Label(tk.Frame):
         self.textbody ='Message Bar Text'
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
+    def set(self, body):
+        self.text.destroy()
+        self.textbody = body
+        self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.pack()
 
 class MainApplication(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
         self.databar = Databar(self)
-        self.main = Main(self, self.databar.textbody.get())
+        self.main = Main(self)
         self.label = Label(self)
         self.exit = Exit(self)
+
+        Dict = {'State 1': 'This is the first section of text', 'State 2':'This is body #2, there is one more state',
+                'State 3': 'The third and final set of textual data'}
+        self.label.set('Hello World')
+        self.main.set(Dict[self.databar.textbody.get()])
 
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
