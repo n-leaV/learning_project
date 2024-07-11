@@ -1,11 +1,10 @@
-import numpy as np
 import csv
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 
 
-class Exit(tk.Frame):
+class Exit(tk.Frame):                                                                           #Exit button class
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -16,7 +15,7 @@ class Exit(tk.Frame):
             command=lambda: root.quit()
         )
 
-class Databar(tk.Frame):
+class Databar(tk.Frame):                                                                        #databar class. a radiobutton w/ 3 states
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -36,7 +35,7 @@ class Databar(tk.Frame):
     def getkey(self):
         return self.textbody.get()
 
-class Main(tk.Frame):
+class Main(tk.Frame):                                                                           #main class, meant to hold a main body of text based on databar
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -50,7 +49,7 @@ class Main(tk.Frame):
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
 
-class Label(tk.Frame):
+class Label(tk.Frame):                                                  #label class used for testing atm                                                    
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -59,12 +58,13 @@ class Label(tk.Frame):
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
     def set(self, body):
-        self.text.destroy()
+        # self.text.destroy()
         self.textbody = body
-        self.text = tk.Label(self.frame, text=self.textbody)
+        # self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.config(text=self.textbody)
         self.text.pack()
 
-class MainApplication(tk.Frame):
+class MainApplication(tk.Frame):                                        #MainApp class
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -83,6 +83,7 @@ class MainApplication(tk.Frame):
         self.label.set('Hello World')
         self.main.set(Dict[self.dictkey])
         print(self.dictkey)
+        
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
         self.main.frame.pack(side='top')
@@ -90,6 +91,7 @@ class MainApplication(tk.Frame):
     
     def update(self):
         self.dictkey = self.databar.getkey()
+
 
 if __name__ == "__main__":
     root = tk.Tk()

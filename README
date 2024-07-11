@@ -2,3 +2,9 @@ Learning Project
 This is a workspace for me to practice and learm good coding techniques.
     Project 1.
     A basic GUI setup using tkinter. I am attempting to follow clean coding practices
+    Some issues during the project:
+        - Making the radiobutton change states
+        - Understanding methods in classes
+        - Understanding loop protocol
+        - passing radiobutton states to a different widget
+        - Understanding the MainApp as a controller
