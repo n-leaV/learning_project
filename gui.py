@@ -73,9 +73,9 @@ class MainApplication(tk.Frame):
         Dict = {'State 1': 'This is the first section of text', 'State 2': 'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual data'}
         
-        self.dictval = self.databar.textbody.get()
+        self.dictkey = self.databar.textbody.get()
         self.label.set('Hello World')
-        self.main.set(Dict[self.dictval])
+        self.main.set(Dict[self.dictkey])
 
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
