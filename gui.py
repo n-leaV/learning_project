@@ -24,14 +24,17 @@ class Databar(tk.Frame):
         self.frame = tk.Frame(self.parent)
         self.textbody= tk.StringVar(value="State 1")
         self.s1button = tk.Radiobutton(self.frame, text="State 1", variable=self.textbody,
-            indicatoron=False, value="State 1", width=32)
+            indicatoron=False, value="State 1", width=32, command=self.onRadioChange)
         self.s2button = tk.Radiobutton(self.frame, text="State 2", variable=self.textbody,
-            indicatoron=False, value="State 2", width=32)
+            indicatoron=False, value="State 2", width=32, command=self.onRadioChange)
         self.s3button = tk.Radiobutton(self.frame, text="State 3", variable=self.textbody,
-            indicatoron=False, value="State 3", width=32)
+            indicatoron=False, value="State 3", width=32, command=self.onRadioChange)
         self.s1button.pack(side="left")
         self.s2button.pack(side="left")
         self.s3button.pack(side='left')
+    def onRadioChange(self,event=None):
+        print(self.textbody.get())
+        self.stringkey = self.textbody.get()
 
 class Main(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -76,6 +79,7 @@ class MainApplication(tk.Frame):
         self.dictkey = self.databar.textbody.get()
         self.label.set('Hello World')
         self.main.set(Dict[self.dictkey])
+
 
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
