@@ -15,7 +15,6 @@ class Exit(tk.Frame):
             text='Exit',
             command=lambda: root.quit()
         )
-        #self.button.pack(side='right')
 
 class Databar(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -32,9 +31,10 @@ class Databar(tk.Frame):
         self.s1button.pack(side="left")
         self.s2button.pack(side="left")
         self.s3button.pack(side='left')
-    def onRadioChange(self,event=None):
+    def onRadioChange(self):
         print(self.textbody.get())
-        self.stringkey = self.textbody.get()
+    def getkey(self):
+        return self.textbody.get()
 
 class Main(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -73,22 +73,26 @@ class MainApplication(tk.Frame):
         self.label = Label(self)
         self.exit = Exit(self)
 
-        Dict = {'State 1': 'This is the first section of text', 'State 2': 'This is body #2, there is one more state',
-                'State 3': 'The third and final set of textual data'}
+        Dict = {'State 1': 'This is the first section of text', 
+                'State 2': 'This is body #2, there is one more state',
+                'State 3': 'The third and final set of textual info'}
         
-        self.dictkey = self.databar.textbody.get()
+        #self.dictkey = self.databar.textbody.get()
+        self.update()
+
         self.label.set('Hello World')
         self.main.set(Dict[self.dictkey])
-
-
+        print(self.dictkey)
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
         self.main.frame.pack(side='top')
         self.exit.button.pack(side='bottom')
-
-       # <create the rest of your GUI here>
+    
+    def update(self):
+        self.dictkey = self.databar.getkey()
 
 if __name__ == "__main__":
     root = tk.Tk()
+    MainApplication(root).update()
     MainApplication(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
