@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 
 
-class Exit(tk.Frame):                                                                           #Exit button class
+class Exit(tk.Frame):                                                   #Exit button class
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -15,7 +15,7 @@ class Exit(tk.Frame):                                                           
             command=lambda: root.quit()
         )
 
-class Databar(tk.Frame):                                                                        #databar class. a radiobutton w/ 3 states
+class Databar(tk.Frame):                                                 #databar class. a radiobutton w/ 3 states
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
@@ -35,7 +35,7 @@ class Databar(tk.Frame):                                                        
     def getkey(self):
         return self.textbody.get()
 
-class Main(tk.Frame):                                                                           #main class, meant to hold a main body of text based on databar
+class Main(tk.Frame):                                                    #main class, meant to hold a main body of text based on databar
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
