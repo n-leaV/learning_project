@@ -29,6 +29,18 @@ def reduction(matrix):
     
     return matrix
 
+def totalSquares (y):                                                                                 #where y is the measured data
+    #lon = y.shape[0]
+    avg = np.average(y)
+    sum = 0
+    for i in range(0, len(y), 1):
+        sum = sum + (y[i]-avg)**2
+    return sum
+
+def rSquared(rss, tss):
+    rsqrd = 1-(rss/tss)
+    return rsqrd
+
 
 def select_file():                                #Open file dialogue
     filetypes = (
@@ -36,12 +48,10 @@ def select_file():                                #Open file dialogue
         ('All files', '*.*')
     )
 
-    #grabbing the filename
-    global filename
-    filename = fd.askopenfilename(
+    filename = fd.askopenfilename(          
         title='Open a file',
         initialdir='/',
-        filetypes=filetypes)
+        filetypes=filetypes)            #grabbing the filename
 
     showinfo(
         title='Selected File',
@@ -74,14 +84,44 @@ def data_extract(filename):
     return data
 
 class polynomial:
-    def __init__(self, data, *args, **kwargs):
-        for i in range(data.shape[1])
+    def __init__(self, x, y, *args, **kwargs):
+        self.datalength = len(x)
+        self.matrix(x)
+        self.bmod = np.matmul(self.A.transpose(),y)
+        self.augment = np.column_stack((self.symmetric, self.bmod)) 
+        self.echelon = reduction(self.augment)
+        self.soln = self.echelon[:,-1]
+        self.a = self.echelon[0,-1]
+        self.b = self.echelon[1,-1]
+        self.c = self.echelon[2,-1]
+        self.residualSum(x, y, self.soln)
+        self.tss = totalSquares(y)
+        self.rsqd = rSquared(self.rss, self.tss)
+
+    def matrix(self, x):
+        left = np.multiply(x, x)
+        self.A =np.column_stack((left, x, np.ones(self.datalength)))
+        self.symmetric = np.matmul(self.A.transpose(), self.A)
+    
+    def residualSum (self, x, y, c):                                        #where x is xvals, y is measured vals, and c is the solution vector
+        sum = 0
+        for i in range(0, self.datalength, 1):
+            sum = sum + (y[i]-(x[i]**2*c[0]+x[i]*c[1]+c[2]))**2
+        self.rss = sum
+
     pass
 
 
 def main():
     file = select_file()
     data = data_extract(file)
+    print(data)
+    test = polynomial(data[:,0], data[:,2])
+    print(test.echelon)
+    print(test.soln)
+    print(test.rsqd)
+
+
 
 if __name__ == "__main__":
     main()
