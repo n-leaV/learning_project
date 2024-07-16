@@ -9,23 +9,24 @@ from tkinter.messagebox import showinfo
 
 def reduction(matrix):
     row = matrix.shape[0]
-
+    print(row)
+    print(matrix)
     for j in range(0, row):                      #downward phase of row reduction, iterates through and reveals pivots. should be scalable
         for i in range(j, row-1):
             matrix[i+1,:] = matrix[i+1,:] - np.multiply(matrix[i+1,j]/matrix[j,j], matrix[j,:])
-            #print(aug)
+            print(matrix)
             i += 1
         j += 1
 
     for i in range(0, row):                      #normalizing pivot rows to a pivot value of 1
         matrix[i,:] = matrix[i,:]/matrix[i,i]
-        #print(aug)
+        print(matrix)
         i +=1
 
     for j in range(row-1, 0, -1):                #upward phase of row reduction, iterates through and solves for pivots. decrementing loop
         for i in range(j, 0, -1):
             matrix[i-1,:] = matrix[i-1,:] - np.multiply(matrix[i-1,j], matrix[j,:])
-            #print(aug)
+            print(matrix)
     
     return matrix
 
@@ -96,7 +97,7 @@ class polynomial:
 
     def matrix(self, x):
         left = np.multiply(x, x)
-        self.A =np.column_stack((left, x, np.ones(self.datalength)))
+        self.A = np.column_stack((left, x, np.ones(self.datalength)))
         self.symmetric = np.matmul(self.A.transpose(), self.A)
     
     def residualSum (self, x, y, c):                                        #where x is xvals, y is measured vals, and c is the solution vector
@@ -107,15 +108,49 @@ class polynomial:
 
     pass
 
+class exponential:
+    def __init__(self, x, y, *args, **kwargs):
+        self.datalength = len(x)
+        self.matrix(x)
+        self.z = np.log10(y)
+        self.zmod = np.matmul(self.A.transpose(),self.z)
+        self.augment = np.column_stack((self.symmetric, self.zmod)) 
+        self.echelon = reduction(self.augment)
+        self.soln = self.echelon[:,-1]
+        self.m = self.echelon[0,-1]
+        self.b = self.echelon[1,-1]
+        self.a = 10**self.b
+        self.residualSum(x, self.z, self.soln)
+        self.tss = totalSquares(self.z)
+        self.rsqd = rSquared(self.rss, self.tss)
+
+    def matrix(self, x):
+        self.A = np.column_stack((x, np.ones(self.datalength)))
+        self.symmetric = np.matmul(self.A.transpose(), self.A)
+
+    def residualSum (self, x, y, c):
+        sum = 0
+        for i in range(0, self.datalength, 1):
+            sum = sum + (y[i]-(x[i]*c[0]+c[1]))**2
+        self.rss = sum        
+    
+    pass
+
+
+
 
 def main():
-    file = select_file()
+    #file = select_file()
+    #print(file)
+    file = "C:/Users/nleavitt/Python/Acoustic_test/data_2.csv"
     data = data_extract(file)
     print(data)
-    test = polynomial(data[:,0], data[:,2])
-    print(test.echelon)
+    test = exponential(data[:,0], data[:,2])
+    # print(test.echelon)
     print(test.soln)
     print(test.rsqd)
+    print(test.rss)
+    print(test.tss)
 
 
 
