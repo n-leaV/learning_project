@@ -30,8 +30,11 @@ class Databar(tk.Frame):                                                 #databa
         self.s1button.pack(side="left")
         self.s2button.pack(side="left")
         self.s3button.pack(side='left')
+    
     def onRadioChange(self):
-        print(self.textbody.get())
+        #print(self.textbody.get())
+        application.update()
+        
     def getkey(self):
         return self.textbody.get()
 
@@ -44,9 +47,8 @@ class Main(tk.Frame):                                                    #main c
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
     def set(self, body):
-        self.text.destroy()
         self.textbody = body
-        self.text = tk.Label(self.frame, text=self.textbody)
+        self.text.config(text=self.textbody)
         self.text.pack()
 
 class Label(tk.Frame):                                                  #label class used for testing atm                                                    
@@ -58,9 +60,7 @@ class Label(tk.Frame):                                                  #label c
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
     def set(self, body):
-        # self.text.destroy()
         self.textbody = body
-        # self.text = tk.Label(self.frame, text=self.textbody)
         self.text.config(text=self.textbody)
         self.text.pack()
 
@@ -73,16 +73,15 @@ class MainApplication(tk.Frame):                                        #MainApp
         self.label = Label(self)
         self.exit = Exit(self)
 
-        Dict = {'State 1': 'This is the first section of text', 
+        self.Dict = {'State 1': 'This is the first section of text', 
                 'State 2': 'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual info'}
         
-        #self.dictkey = self.databar.textbody.get()
         self.update()
 
-        self.label.set('Hello World')
-        self.main.set(Dict[self.dictkey])
-        print(self.dictkey)
+        #self.label.set('Hello World')
+        #self.main.set(self.Dict[self.dictkey])
+        #print(self.dictkey)
         
         self.databar.frame.pack(side='top')
         self.label.frame.pack(side='top')
@@ -91,10 +90,11 @@ class MainApplication(tk.Frame):                                        #MainApp
     
     def update(self):
         self.dictkey = self.databar.getkey()
+        self.main.set(self.Dict[self.dictkey])
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    MainApplication(root).update()
-    MainApplication(root).pack(side="top", fill="both", expand=True)
+    application = MainApplication(root)
+    application.pack(side="top", fill="both", expand=True)
     root.mainloop()

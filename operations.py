@@ -30,7 +30,6 @@ def reduction(matrix):
     return matrix
 
 def totalSquares (y):                                                                                 #where y is the measured data
-    #lon = y.shape[0]
     avg = np.average(y)
     sum = 0
     for i in range(0, len(y), 1):
@@ -61,8 +60,6 @@ def select_file():                                #Open file dialogue
     return filename
 
 def data_extract(filename):
-    #global data
-    #global lon
     headers = []
     cols = []
     data = []
@@ -80,7 +77,6 @@ def data_extract(filename):
 
     # data extraction
     data = np.genfromtxt(filename, delimiter=',',skip_header=1, usecols = (cols[0],cols[1],cols[2]))   
-    #lon = data.shape[0]
     return data
 
 class polynomial:
