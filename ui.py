@@ -1,4 +1,5 @@
 import sys
+import numpy
 import getopt
 import argparse
 from operations import data_extract , polynomial, exponential
@@ -8,8 +9,8 @@ def parserInit():
     parser.add_argument('filename', help="File to regress")
     parser.add_argument('-p','--polynomial', action='store_true', help='Use the polynomial regression model.')
     parser.add_argument('-e','--exponential', action='store_true', help='Use the polynomial regression model.')
-    args = parser.parse_args(['-p', 'C:/Users/nleavitt/Python/Acoustic_test/data_2.csv' ])
-    #args = parser.parse_args()
+    #args = parser.parse_args(['-p', 'C:/Users/nleavitt/Python/Acoustic_test/data_2.csv' ])
+    args = parser.parse_args()
     return args
 
 def parserLogic(args):
