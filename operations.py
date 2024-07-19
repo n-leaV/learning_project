@@ -9,24 +9,24 @@ from tkinter.messagebox import showinfo
 
 def reduction(matrix):
     row = matrix.shape[0]
-    print(row)
-    print(matrix)
+    #print(row)
+    #print(matrix)
     for j in range(0, row):                      #downward phase of row reduction, iterates through and reveals pivots. should be scalable
         for i in range(j, row-1):
             matrix[i+1,:] = matrix[i+1,:] - np.multiply(matrix[i+1,j]/matrix[j,j], matrix[j,:])
-            print(matrix)
+            #print(matrix)
             i += 1
         j += 1
 
     for i in range(0, row):                      #normalizing pivot rows to a pivot value of 1
         matrix[i,:] = matrix[i,:]/matrix[i,i]
-        print(matrix)
+        #print(matrix)
         i +=1
 
     for j in range(row-1, 0, -1):                #upward phase of row reduction, iterates through and solves for pivots. decrementing loop
         for i in range(j, 0, -1):
             matrix[i-1,:] = matrix[i-1,:] - np.multiply(matrix[i-1,j], matrix[j,:])
-            print(matrix)
+            #print(matrix)
     
     return matrix
 
