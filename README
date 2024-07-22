@@ -2,9 +2,19 @@ Learning Project
 This is a workspace for me to practice and learm good coding techniques.
     Project 1.
     A basic GUI setup using tkinter. I am attempting to follow clean coding practices
+    gui.py
     Some issues during the project:
         - Making the radiobutton change states
         - Understanding methods in classes
         - Understanding loop protocol
         - passing radiobutton states to a different widget
         - Understanding the MainApp as a controller
+        - Properly formatting code
+
+    Project 2.
+    Setting up my regression model code that can grab data from a csv and be accesable from shell.
+    ui.py and operations.py
+    Issues:
+        - Calculating the R squared value correctly
+        - Parsing bash options and switches
+        - Being able to execute from shell

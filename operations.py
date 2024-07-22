@@ -80,7 +80,7 @@ def data_extract(filename):
     data = np.genfromtxt(filename, delimiter=',',skip_header=1, usecols = (cols[0],cols[1],cols[2]))   
     return data
 
-class polynomial:
+class polynomial:                                                       #defining poly regression
     def __init__(self, x, y, *args, **kwargs):
         self.datalength = len(x)
         self.matrix(x)
@@ -108,7 +108,7 @@ class polynomial:
 
     pass
 
-class exponential:
+class exponential:                                                      #defining exp regression
     def __init__(self, x, y, *args, **kwargs):
         self.datalength = len(x)
         self.matrix(x)

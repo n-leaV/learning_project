@@ -48,8 +48,8 @@ def main():
         test = exponential(data[:,0], data[:,2])
         print("Exponential regression selected")
 
-    print("Regression constants are", test.soln)
-    print("The R squared value is", test.rsqd)
+    print("\tRegression constants are", test.soln)
+    print("\tThe R squared value is", test.rsqd)
     #print(test.rss)
     #print(test.tss)
 
