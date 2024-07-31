@@ -18,3 +18,13 @@ This is a workspace for me to practice and learm good coding techniques.
         - Calculating the R squared value correctly
         - Parsing bash options and switches
         - Being able to execute from shell
+        - Formatting previously typed matrix code
+
+    Project 3.
+    A small script that will normalize decibel reading values to distance of 1 ft. I want this to be compatable with my regression model code.
+    decibelnorm.py
+    Issues:
+        - Passing multiple arguments through argparse
+        - Getting it to accept multiple columns of data
+        - Requiring the data to come in pairs(decibels, distance)
+        - Have it write to a .csv file?

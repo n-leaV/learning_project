@@ -6,7 +6,7 @@ from operations import data_extract as dataExtract
 from operations import select_file as selectFile
 from operations import polynomial, exponential
 
-def parserInit():
+def parserInit():                                                                                       #argument parsing intialize
     parser = argparse.ArgumentParser(description='Run regression models on .csv data.')
     parser.add_argument('filename', help="File to regress")
     parser.add_argument('-p','--polynomial', action='store_true', help='Use the polynomial regression model.')
@@ -16,7 +16,7 @@ def parserInit():
     args = parser.parse_args()
     return args
 
-def errorLogic(args):
+def errorLogic(args):                                                                                   #error control, ensuring no wrong values are entered
     file = args.filename
     poly = args.polynomial
     exp = args.exponential
@@ -39,7 +39,7 @@ def main():
     #print(args.exponential)
     file = args.filename
     
-    if args.gui == True: file = selectFile()
+    if args.gui == True: file = selectFile()                        #access the gui if flag is set
 
     errorLogic(args)
 
@@ -48,10 +48,10 @@ def main():
 
     data = dataExtract(file)
     #print(data)
-    if args.polynomial == True: 
+    if args.polynomial == True:                                     #polynomial selected
         test = polynomial(data[:,0], data[:,2])
         print("Polynomial regression selected")
-    if args.exponential == True: 
+    if args.exponential == True:                                    #exponential selected
         test = exponential(data[:,0], data[:,2])
         print("Exponential regression selected")
 

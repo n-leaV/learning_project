@@ -6,7 +6,7 @@ from operations import data_extract as dataExtract
 from operations import select_file as selectFile
 
 
-def parserInit():
+def parserInit():                                                                                               #arg parsing initialize
     parser = argparse.ArgumentParser(description='Normalize decibel readings to 1ft.')
     parser.add_argument('filename', help="File to normalize")
     parser.add_argument('-c', '--columns', help="Number of columns to normalize", nargs='+', type = int)
@@ -15,7 +15,7 @@ def parserInit():
     args = parser.parse_args()
     return args
 
-def errorLogic(args):
+def errorLogic(args):                                                               #error logic ensuring no invalid arguments
     file = args.filename
     cols = args.columns
     # if cols < 1:
@@ -29,7 +29,7 @@ def errorLogic(args):
         sys.exit('Invalid filetype, select a .csv file')
 
 
-def dataPull(file, args):
+def dataPull(file, args):                                                   #pulling data from selected .csv
     cols = args.columns
     header = args.skipheader
     # collist = []

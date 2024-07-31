@@ -31,7 +31,7 @@ class Databar(tk.Frame):                                                 #databa
         self.s2button.pack(side="left")
         self.s3button.pack(side='left')
     
-    def onRadioChange(self):
+    def onRadioChange(self):                                           #Radiochange function, atm its solely used to update the dictkey
         #print(self.textbody.get())
         application.update()
         
@@ -46,7 +46,7 @@ class Main(tk.Frame):                                                    #main c
         self.textbody = 'initialising'
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
-    def set(self, body):
+    def set(self, body):                                                   #method for resetting the Main text body
         self.textbody = body
         self.text.config(text=self.textbody)
         self.text.pack()
@@ -59,21 +59,21 @@ class Label(tk.Frame):                                                  #label c
         self.textbody ='Message Bar Text'
         self.text = tk.Label(self.frame, text=self.textbody)
         self.text.pack()
-    def set(self, body):
+    def set(self, body):                                                #method for resetting the label text body
         self.textbody = body
         self.text.config(text=self.textbody)
         self.text.pack()
 
 class MainApplication(tk.Frame):                                        #MainApp class
     def __init__(self, parent, *args, **kwargs):
-        tk.Frame.__init__(self, parent, *args, **kwargs)
+        tk.Frame.__init__(self, parent, *args, **kwargs)                #initialising 
         self.parent = parent
         self.databar = Databar(self)
         self.main = Main(self)
         self.label = Label(self)
         self.exit = Exit(self)
 
-        self.Dict = {'State 1': 'This is the first section of text', 
+        self.Dict = {'State 1': 'This is the first section of text',        #Dictionary for the textbody
                 'State 2': 'This is body #2, there is one more state',
                 'State 3': 'The third and final set of textual info'}
         
@@ -88,7 +88,7 @@ class MainApplication(tk.Frame):                                        #MainApp
         self.main.frame.pack(side='top')
         self.exit.button.pack(side='bottom')
     
-    def update(self):
+    def update(self):                                                   #update method gets called on switch change
         self.dictkey = self.databar.getkey()
         self.main.set(self.Dict[self.dictkey])
 

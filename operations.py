@@ -95,7 +95,7 @@ class polynomial:                                                       #definin
         self.tss = totalSquares(y)
         self.rsqd = rSquared(self.rss, self.tss)
 
-    def matrix(self, x):
+    def matrix(self, x):                                                #polynomial matrix construction method
         left = np.multiply(x, x)
         self.A = np.column_stack((left, x, np.ones(self.datalength)))
         self.symmetric = np.matmul(self.A.transpose(), self.A)
@@ -124,11 +124,11 @@ class exponential:                                                      #definin
         self.tss = totalSquares(self.z)
         self.rsqd = rSquared(self.rss, self.tss)
 
-    def matrix(self, x):
+    def matrix(self, x):                                                #exponential matrix construction method
         self.A = np.column_stack((x, np.ones(self.datalength)))
         self.symmetric = np.matmul(self.A.transpose(), self.A)
 
-    def residualSum (self, x, y, c):
+    def residualSum (self, x, y, c):                                    #exponential residual sums method
         sum = 0
         for i in range(0, self.datalength, 1):
             sum = sum + (y[i]-(x[i]*c[0]+c[1]))**2
