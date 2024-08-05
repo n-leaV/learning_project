@@ -24,17 +24,17 @@ def errorLogic(args):                                                           
     #     #print("No regression model selected.")
     #     sys.exit("Cannot normalize 0 columns")
 
-    if not file.endswith('.csv'):
+    if not file.endswith('.csv'):                                           #testing for a.csv file
         argparse.ArgumentError
         #print('Invalid filetype, select a .csv file')
         sys.exit('Invalid filetype, select a .csv file')
 
-    if (len(cols) & 1):
+    if (len(cols) & 1):                                                     #testing for negative numbers
         sys.exit('Invalid number of colums, must be a multiple of 2')
 
 def dataPull(file, args):                                                   #pulling data from selected .csv
-    cols = args.columns
-    header = args.skipheader
+    cols = args.columns                                                     #which columns to use
+    header = args.skipheader                                                #Whether or not skipping the header. uses boolean
     # collist = []
     # for i in cols:
     #     collist.append(i)
@@ -42,7 +42,7 @@ def dataPull(file, args):                                                   #pul
     data = np.genfromtxt(file, delimiter=',',skip_header=header, usecols = cols)
     return data
 
-def dataNorm(data):
+def dataNorm(data):                                                         #normalizing decibels to 1ft
     norm = np.zeros((data.shape[0], data.shape[1]//2))
     for i in range (data.shape[1]-1):
         for j in range (data.shape[0]):
@@ -51,7 +51,7 @@ def dataNorm(data):
         i+=2
     return norm
 
-def negativeCheck(data):
+def negativeCheck(data):                                                    #checking for negative numbers in a data set--wouldve taken less lines in assembly lol
     for i in range (data.shape[1]):
         for j in range (data.shape[0]):
             if data[j, i]<0:
