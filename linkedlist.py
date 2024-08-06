@@ -1,7 +1,7 @@
 #DISCLAIMER     DISCLAIMER      DISCLAIMER
 #most of the code in this file is not my own. This code was generally sourced from https://www.geeksforgeeks.org/python-linked-list/
 #This code is here to help me learn and better understand the operations of linked lists within python.
-#Node.__init__() and Node.insertTop() were taken directly from the above link as a framwork for my learning. The rest has been worked out by me.
+#Node.__init__(), Linkedlist.__init(), and LinkedList.insertTop() were taken directly from the above link as a framwork for my learning. The rest has been worked out by me.
 
 class Node:
     def __init__(self, data):
@@ -12,17 +12,18 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.branch = None
-        self.branchdict = None                      #creating a dict for branch/head pairs. the branch is the key and the head will be the value
+        self.branchdict = {}                      #creating a dict for branch/head pairs. the branch is the key and the head will be the value
     def insertTop(self, data):
         new_node = Node(data)
         if self.head is None:                       #if there is no head, the head becomes the new node
             self.head = new_node
-            self.branchdict['main'] = self.head     #updating the head stored in the branch dict. branchdict now holds the right pointer
+            self.branch = 'main'
+            self.branchdict[self.branch] = self.head     #updating the head stored in the branch dict. branchdict now holds the right pointer
             return
         else:                                       #else, this node now points to the old head and the new node becomes the head
             new_node.next = self.head
             self.head = new_node
-            self.branchdict['main'] = self.head
+            self.branchdict[self.branch] = self.head
 
     def insertEnd(self, data):
         new_node = Node(data)
@@ -84,7 +85,7 @@ class LinkedList:
                 current_node.next = current_node.next.next
         else:print("No index found")
 
-    def printBranch(self):                                          #iterates from head down, will only print the branch its on
+    def printList(self):                                          #iterates from head down, will only print the branch its on
         current_node = self.head
         while(current_node):
             print(current_node.data)
@@ -104,11 +105,11 @@ class LinkedList:
             self.branchdict[branchname] = new_node                 #stores branchname/new_node pair in branch dict. does NOT update head. branchChange method will swap head
         else:print("No index found")
 
-    def branchChange(self, branchname):
+    def changeBranch(self, branchname):                            #will need to include error checking to ensure that branchname is valid
         self.head = self.branchdict[branchname]
         self.branch = branchname
 
-    def printHead(self):
+    def printBranch(self):
         print(self.branch)
 
         #make a list for each head and allow for swapping???

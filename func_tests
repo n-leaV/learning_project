@@ -14,5 +14,11 @@ def main():
         links.insertEnd("cool?")
         links.insertIndex("very", 3)
         links.printList()
+        links.newBranch("branch", 3, "new")
+        links.changeBranch("new")
+        links.insertTop("new")
+        links.insertIndex("is", 2)
+        links.printBranch()
+        links.printList()
 if __name__ == "__main__":
     main()
