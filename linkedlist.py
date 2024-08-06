@@ -11,6 +11,7 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head = None
+        self.headlist = None
     def insertTop(self, data):
         new_node = Node(data)
         if self.head is None:                       #if there is no head, the head becomes the new node
@@ -84,3 +85,20 @@ class LinkedList:
         while(current_node):
             print(current_node.data)
             current_node = current_node.next
+
+    def newBranch(self, data, index):
+        if (index == 0):
+            self.insertTop(data)
+        current_node = self.head
+        placeholder = 0
+        while(placeholder+1 != index and current_node != None):
+            current_node = current_node.next
+            placeholder+=1
+        if (current_node != None):
+            new_node = Node(data)
+            new_node.next = current_node.next
+        else:print("No index found")
+        #make a list for each head and allow for swapping???
+        #allow naming heads? how best to deal with this?
+        #a dict with the name as the key? each dict val is the head of a seperate branch
+        #would have to implement nameing in each method, initialise first as 'main'
