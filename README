@@ -28,3 +28,11 @@ This is a workspace for me to practice and learm good coding techniques.
         - Getting it to accept multiple columns of data
         - Requiring the data to come in pairs(decibels, distance)
         - Have it write to a .csv file?
+
+    Project 4. 
+    A few files to help me learn simple data structures in python.
+    linkedlist.py and bst.py
+    Issues:
+        - Determining the child of a node
+        - Using a recursive structure to set up BST
+        - Allowing branching functionality in a linked list
